@@ -9,4 +9,8 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="suave" Version="2.6.2" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chat</h1>
+    <ul id="chat">
+        <li>Nothing: Yet</li>
+    </ul>
+
+        
+    <form id="chat-container">
+        <h1>Chat</h1>
+    
+        <input placeholder="Type message.." name="msg" id="msg-to-send" required></input>
+    
+        <button type="submit" class="btn">Send</button>
+    </form>
+    
+    <script>
+        window.onload = () => {
+            const BACKEND_URL = "ws://0.0.0.0:8080/websocket"
+            const socket = new WebSocket(BACKEND_URL)
+            const chatmsgform = document.getElementById("chat-container")
+            const msgtosend = document.getElementById("msg-to-send")
+            
+            socket.onopen = () =>  { 
+                console.log("Socket Opened")
+                // setInterval(_ => socket.send("Hello F#!"), 3000)
+            }
+
+            // When we get a socket msg, put it into the chat
+            socket.onmessage = (msg) => {
+                var chat = document.getElementById("chat")
+                var chatmsg = document.createElement("li")
+                chatmsg.appendChild(document.createTextNode(msg.data))
+                chat.appendChild(chatmsg)
+            }
+            
+            // when we want to send a message, send it back through the websocket 
+            chatmsgform.onsubmit = (e) => {
+                e.preventDefault()
+                socket.send(msgtosend.value)
+            }
+
+            // Cleanup
+            socket.onerror = (err) => console.error(err)
+            socket.onclose = () => console.log("Socket Closed")
+        }
+    </script>
+    </body>
+</html>
