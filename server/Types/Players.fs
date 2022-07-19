@@ -10,3 +10,8 @@ module Players =
         Upfacing: Deck
         Downfacing: Deck
     }
+
+    type Hands =
+    | Hand
+    | Upfacing
+    | Downfacing
