@@ -61,11 +61,33 @@ module Deck =
 
         playerWithNewHand, leftOverCards
 
+    // Takes a list of players and gives them each a hand, upfacing and downfacing, as well as the remaining deck
     let deal (players: Player list) (deck: Deck) : Player list * Deck =
 
         match (players |> List.length > 5) with
         | true -> failwith "Only 5 players max"
-        | false -> players, deck
+        | false ->
+            let (players: Player list), newDeck =
+                (deck, players)
+                ||> List.mapFold (fun acc player ->
+
+                    // Take 9 cards, split into 3 piles of 3, make sure to update the deck each time
+                    let top3, remaining = acc |> List.splitAt 3
+                    let snd3, remaining = remaining |> List.splitAt 3
+                    let third3, remaining = remaining |> List.splitAt 3
+
+
+                    // Then put each of the piles of 3 into the players hand/upfacing/downfacing
+                    let newp =
+                        { Name = player.Name
+                          Hand = top3
+                          Upfacing = snd3
+                          Downfacing = third3 }
+
+
+                    newp, remaining)
+
+            players, newDeck
 
 
 
