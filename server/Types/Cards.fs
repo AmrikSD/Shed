@@ -1,4 +1,4 @@
-namespace Game
+namespace Types
 
 module Cards =
     type Suit = 
@@ -26,7 +26,3 @@ module Cards =
 
     type Deck = Card list
     type Hand = Hand of Deck
-
-module Player =
-
-    type Player = string * Cards.Hand * Cards.Hand * Cards.Hand

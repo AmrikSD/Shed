@@ -1,8 +1,10 @@
 ﻿namespace Game
 
-module main = 
-    open Deck
+open Types.Players
+open Players
+open Deck
 
+module main =
     [<EntryPoint>]
     let main _ =
         printfn "%s" "hi"
@@ -13,4 +15,9 @@ module main =
         let shuffled = FreshDeck |> shuffle
         shuffled |> List.iter( fun card -> printfn "%A" card)
         printfn "%i" (List.length shuffled)
+        
+        let Amrik: Player = newPlayer "Amrik"
+        printfn "%A" Amrik
+
+
         0

@@ -5,7 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helpers/*.fs" />
-    <Compile Include="Types.fs" />
+    <Compile Include="Types/Cards.fs" />
+    <Compile Include="Types/Players.fs" />
+    <Compile Include="Types/Game.fs" />
+    <Compile Include="Players.fs" />
     <Compile Include="Game.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
