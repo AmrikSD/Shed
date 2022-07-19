@@ -7,7 +7,7 @@ open Deck
 module main =
     [<EntryPoint>]
     let main _ =
-       
+
         let deck = FreshDeck |> shuffle
         printfn "%A" (deck |> List.length)
 
