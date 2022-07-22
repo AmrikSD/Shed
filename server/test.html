@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="English">
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+        <div>
+            <h1>Chat</h1>
+            <ul id="chat-messages">
+                <li>Sadguh: no messages yet</li>
+            </ul>
+            <form name="chatmsg">
+                <input type="text" id="chat-message">
+                <input type="submit" value="Send">
+            </form>
+        </div>
+
+        <script>
+            window.onload = () => {
+                const BACKEND_URL = "ws://0.0.0.0:8989/chat"
+                const socket = new WebSocket(BACKEND_URL)
+
+                socket.onopen = () =>  { 
+                    console.log("Chat Socket Opened")
+                    // Make the icon green
+                }
+
+                socket.onmessage = (msg) => {
+                    var chat = document.getElementById("chat-messages")
+                    var chatmsg = document.createElement("li")
+                    chatmsg.appendChild(document.createTextNode(msg.data))
+                    chat.appendChild(chatmsg)
+                }
+                socket.onerror = (err) => console.error(err)
+                socket.onclose = () => {
+                    console.log("Chat Socket Closed")
+                    // Make the icon red
+                }
+
+                document.forms.chatmsg.onsubmit = () => {
+                    event.preventDefault()
+                    const msgInput = document.getElementById("chat-message")
+                    socket.send(msgInput.value)
+                    msgInput.value = ''
+                }
+            }
+        </script>
+    </body>
+</html>
