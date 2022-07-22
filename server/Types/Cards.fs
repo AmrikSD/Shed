@@ -1,26 +1,26 @@
 namespace Types
 
 module Cards =
-    type Suit = 
-    | Diamond
-    | Club
-    | Heart
-    | Spade
+    type Suit =
+        | Diamond
+        | Club
+        | Heart
+        | Spade
 
     type Rank =
-    | Ace
-    | Two
-    | Three
-    | Four
-    | Five
-    | Six
-    | Seven
-    | Eight
-    | Nine
-    | Ten
-    | Jack
-    | Queen
-    | King
+        | Ace
+        | Two
+        | Three
+        | Four
+        | Five
+        | Six
+        | Seven
+        | Eight
+        | Nine
+        | Ten
+        | Jack
+        | Queen
+        | King
 
     type Card = Suit * Rank
 
